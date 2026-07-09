@@ -16,3 +16,5 @@
 
 ## 💻 Сборка проекта
 Для сборки готового `.exe` файла используется скрипт `build.bat`. Он автоматически создает виртуальное окружение, устанавливает зависимости из `requirements.txt` и компилирует программу через `pyinstaller` с параметрами `--onefile` и `--noconsole`.
+
+<img width="702" height="532" alt="DWG_optimizer" src="https://github.com/user-attachments/assets/394eb1ad-50d1-42d4-962a-65bbaf56d19b" />
