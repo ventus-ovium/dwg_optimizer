@@ -1,0 +1,7 @@
+pyinstaller
+pywin32
+pymupdf
+pyinstaller
+pywin32
+pymupdf
+tkinterdnd2
