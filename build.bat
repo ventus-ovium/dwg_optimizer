@@ -3,7 +3,7 @@ chcp 65001 > nul
 setlocal
 
 :: Впишите сюда желаемое имя программы (без .exe)
-set APP_NAME=DWG_Optimizer_v4
+set APP_NAME=DWG_Optimizer_v3
 
 echo ==========================================
 echo      АВТОМАТИЧЕСКАЯ СБОРКА %APP_NAME%

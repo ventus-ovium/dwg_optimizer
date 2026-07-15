@@ -67,28 +67,42 @@ def optimize_dwgs(dwg_paths: list, progress_cb=None, status_cb=None, is_cancelle
                         doc_temp.SetVariable("CMDDIA", 0)
                     except: pass
 
-                    print("     Отключаем рамки...")
+                    print("     Отключаем рамки (через командную строку)...")
+                    
+                    # Нижнее подчеркивание (_) обязательно для русской локализации AutoCAD!
                     frame_commands = [
-                        "IMAGEFRAME\n0\n",
-                        "PDFFRAME\n0\n",
-                        "WIPEOUTFRAME\n0\n",
-                        "XCLIPFRAME\n0\n",
-                        "FRAME\n0\n"
+                        "_FRAME\n0\n",
+                        "_IMAGEFRAME\n0\n",
+                        "_PDFFRAME\n0\n",
+                        "_WIPEOUTFRAME\n0\n",
+                        "_XCLIPFRAME\n0\n"
                     ]
                     
+                    # Отправляем команды как если бы вы печатали их на клавиатуре
                     for cmd in frame_commands:
-                        doc_temp.SendCommand(cmd)
-                        time.sleep(0.5)              
-                        doc_temp.SendCommand("_REGEN\n") 
-                        time.sleep(0.5)              
+                        try:
+                            doc_temp.SendCommand(cmd)
+                            # Даем Автокаду треть секунды, чтобы графический движок "проглотил" команду
+                            time.sleep(0.3) 
+                        except Exception as e:
+                            print(f"     [!] Ошибка команды: {e}")
                     
-                    doc_temp.SendCommand("_REGENALL\n")
-                    time.sleep(1)
-                    doc_temp.SendCommand("_QSAVE\n") 
-                    time.sleep(3) 
+                    # Принудительная регенерация ВООБЩЕ ВСЕХ листов и видовых экранов
+                    try:
+                        doc_temp.SendCommand("_REGENALL\n")
+                        time.sleep(1)
+                    except Exception:
+                        pass
+                        
+                    # Сохраняем файл
+                    try:
+                        doc_temp.Save()
+                    except Exception as e:
+                        print(f"     [!] Ошибка сохранения: {e}")
                     
+                    # Закрываем файл
                     doc_temp.Close(False)
-                    time.sleep(1) 
+                    time.sleep(1)  
                     
                     try:
                         os.replace(temp_dwg, dwg)
