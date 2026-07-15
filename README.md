@@ -28,3 +28,5 @@
 3. Собирает программу через `PyInstaller` (в режиме `--onefile` и `--noconsole`).
 4. Автоматически подхватывает скрытые библиотеки (`tkinterdnd2`, `win32com`) и "вшивает" пользовательскую иконку `icon.ico`.
 5. Переносит готовый исполняемый файл в корневую директорию проекта.
+
+   <img width="752" height="632" alt="Sleekshot 2026-07-15 16-31-35" src="https://github.com/user-attachments/assets/5cb27c45-dee2-4d77-be12-b42929116a4b" />
